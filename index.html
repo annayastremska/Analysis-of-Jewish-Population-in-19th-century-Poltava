@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jewish Population in Poltava Governorate — 19th Century</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f5f0e8;
+    --sepia: #8b6914;
+    --gold: #c9a227;
+    --rust: #8b3a1a;
+    --muted: #6b5d4a;
+    --light: #ede8dc;
+    --border: #c4b89a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* Header */
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding: 60px 80px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .header-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 500;
+    line-height: 1.15;
+    max-width: 800px;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--sepia);
+  }
+
+  .subtitle {
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-value {
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  /* Decorative rule */
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+    padding: 30px 0;
+    opacity: 0.6;
+  }
+
+  /* Main layout */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 80px 80px;
+  }
+
+  /* Context section */
+  .context-block {
+    border-left: 3px solid var(--gold);
+    padding: 24px 32px;
+    margin: 50px 0;
+    background: rgba(201, 162, 39, 0.05);
+  }
+
+  .context-block p {
+    font-family: 'Spectral', serif;
+    font-size: 1.05rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Task sections */
+  .task {
+    margin: 70px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .task.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .task-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .task-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .task h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .hypothesis {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px 16px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+
+  .hypothesis-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust);
+    white-space: nowrap;
+  }
+
+  .hypothesis-text {
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .task-description {
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 28px;
+    max-width: 720px;
+  }
+
+  /* Chart container */
+  .chart-container {
+    border: 1px solid var(--border);
+    background: white;
+    position: relative;
+    margin: 24px 0;
+    overflow: hidden;
+  }
+
+  .chart-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--light);
+    background: var(--light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chart-label a {
+    color: var(--sepia);
+    text-decoration: none;
+    font-size: 9px;
+  }
+
+  .chart-label a:hover {
+    color: var(--gold);
+  }
+
+  iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    display: block;
+  }
+
+  iframe.tall { height: 700px; }
+  iframe.short { height: 500px; }
+
+  /* Conclusion */
+  .conclusion {
+    margin-top: 24px;
+    padding: 20px 28px;
+    border-left: 3px solid var(--ink);
+    background: rgba(26, 18, 8, 0.03);
+  }
+
+  .conclusion-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .conclusion p {
+    font-size: 0.98rem;
+    color: var(--ink);
+  }
+
+  .conclusion .interpretation {
+    margin-top: 10px;
+    font-style: italic;
+    font-family: 'Spectral', serif;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  /* Results */
+  .results {
+    margin: 70px 0;
+    padding: 50px;
+    border: 2px solid var(--ink);
+    position: relative;
+  }
+
+  .results::before {
+    content: 'RESULTS';
+    position: absolute;
+    top: -12px;
+    left: 40px;
+    background: var(--paper);
+    padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+  }
+
+  .results h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+    color: var(--ink);
+  }
+
+  .result-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .result-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .result-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    padding-top: 4px;
+  }
+
+  .result-text strong {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .result-text .interp {
+    font-style: italic;
+    font-family: 'Spectral', serif;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* Divider */
+  hr.section {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 60px 0;
+  }
+
+  /* Code toggle */
+  .code-toggle {
+    margin-top: 24px;
+  }
+
+  .code-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1px solid var(--border);
+    padding: 7px 14px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--light);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .code-toggle-btn:hover {
+    color: var(--sepia);
+    border-color: var(--gold);
+  }
+
+  .code-toggle-btn .arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+    font-size: 9px;
+  }
+
+  .code-toggle-btn.open .arrow {
+    transform: rotate(90deg);
+  }
+
+  .code-block {
+    display: none;
+    margin-top: 0;
+    border: 1px solid var(--border);
+    border-top: none;
+    background: #1a1208;
+    overflow: hidden;
+  }
+
+  .code-block.open {
+    display: block;
+  }
+
+  .code-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(201, 162, 39, 0.7);
+  }
+
+  .code-block pre {
+    margin: 0;
+    padding: 20px 24px;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #e8dcc8;
+    white-space: pre;
+  }
+
+  /* Minimal syntax tinting */
+  .code-block .kw  { color: #f9dc5c; }   /* keywords */
+  .code-block .cm  { color: #7a6e5a; font-style: italic; }  /* comments */
+  .code-block .st  { color: #c9a27a; }   /* strings */
+  .code-block .fn  { color: #d4a96a; }   /* function calls */
+  .code-block .nu  { color: #a0c8a0; }   /* numbers */
+
+  @media (max-width: 768px) {
+    header, main { padding-left: 24px; padding-right: 24px; }
+    h1 { font-size: 1.8rem; }
+    .meta-row { gap: 20px; }
+    iframe { height: 450px; }
+    .results { padding: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Data Analysis · Historical Demography</div>
+  <h1>Jewish Population Density in <em>Poltava Governorate</em></h1>
+  <p class="subtitle">Their role in society and relationship with other groups in the 19th century Russian Empire</p>
+  <div class="meta-row">
+    <div class="meta-item">
+      <span class="meta-label">Author</span>
+      <span class="meta-value">Anna Yastremska</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Dataset</span>
+      <span class="meta-value">Poltava Governorate Population, 19th Century</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Period</span>
+      <span class="meta-value">1835 – 1850</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Region</span>
+      <span class="meta-value">Pale of Settlement, Russian Empire</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="context-block">
+    <p>The Poltava Governorate was part of the Pale of Settlement — the western regions of the Russian Empire where Jews were permitted to reside. This analysis examines where Jewish communities concentrated, how they related to commercial classes, and whether the presence of Cossacks affected Jewish settlement patterns.</p>
+  </div>
+
+  <!-- TASK 1 -->
+  <div class="task" id="task1">
+    <div class="task-header">
+      <span class="task-number">Task 01</span>
+      <h2>Identifying the Location of Jewish Communities</h2>
+    </div>
+
+    <div class="hypothesis">
+      <span class="hypothesis-label">Hypothesis</span>
+      <span class="hypothesis-text">There will be an extremely high concentration in certain districts — regional clusters</span>
+    </div>
+
+    <p class="task-description">
+      Using urban population records from 1835 and 1850, this analysis maps the fraction of Jews in the total population across all districts of the Poltava Governorate. The dropdown allows comparison between the two time points, revealing patterns of growth and migration over fifteen years.
+    </p>
+
+    <div class="code-toggle">
+      <button class="code-toggle-btn" onclick="toggleCode(this, 'code1')">
+        <span class="arrow">▶</span> View Source Code
+      </button>
+      <div class="code-block" id="code1">
+        <div class="code-block-header"><span>Python · pandas · altair</span><span>Task 01</span></div>
+        <pre><span class="cm"># FOR 1835: district, number of Jews, total population</span>
+data_religion = pd.read_csv(<span class="st">"...10_Міське населення.csv"</span>, header=<span class="nu">2</span>)
+data_religion = data_religion.iloc[<span class="nu">0</span>:<span class="nu">-6</span>, [<span class="nu">0</span>,<span class="nu">6</span>,<span class="nu">9</span>]]
+data_religion = data_religion.rename(columns={<span class="st">"о.с..1"</span>: <span class="st">"Євреї"</span>, <span class="st">"о.с..2"</span>: <span class="st">"Загальне населеня"</span>, <span class="st">"Місто"</span>: <span class="st">"Повіти"</span>})
+data_religion[<span class="st">"Повіти"</span>] = data_disctricts_in_rows
+
+<span class="cm"># FOR 1850</span>
+data_religion2 = pd.read_csv(<span class="st">"...10_Міське населення.csv"</span>, header=<span class="nu">2</span>)
+data_religion2 = data_religion2.iloc[<span class="nu">0</span>:<span class="nu">-6</span>, [<span class="nu">0</span>,<span class="nu">15</span>,<span class="nu">18</span>]]
+data_religion2 = data_religion2.rename(columns={<span class="st">"о.с..4"</span>: <span class="st">"Євреї"</span>, <span class="st">"о.с..5"</span>: <span class="st">"Загальне населеня"</span>, <span class="st">"Місто"</span>: <span class="st">"Повіти"</span>})
+data_religion2[<span class="st">"Повіти"</span>] = data_disctricts_in_rows
+
+<span class="cm"># Add year column, fix spelling, calculate fractions</span>
+data_religion[<span class="st">"year"</span>] = <span class="nu">1835</span>
+data_religion2[<span class="st">"year"</span>] = <span class="nu">1850</span>
+
+data_religion[<span class="st">"Частка_Євреїв"</span>] = data_religion[<span class="st">"Євреї"</span>] / data_religion[<span class="st">"Загальне населеня"</span>]
+data_religion2[<span class="st">"Частка_Євреїв"</span>] = data_religion2[<span class="st">"Євреї"</span>] / data_religion2[<span class="st">"Загальне населеня"</span>]
+
+data_all = pd.concat([data_religion, data_religion2], ignore_index=<span class="kw">True</span>)
+gdf = gpd.<span class="fn">read_file</span>(<span class="st">"final_geojson2.geojson"</span>)
+gdf_merged = gdf.<span class="fn">merge</span>(data_all, left_on=<span class="st">"name"</span>, right_on=<span class="st">"Повіти"</span>, how=<span class="st">"left"</span>)
+
+<span class="cm"># Year dropdown selection</span>
+year_dropdown = alt.<span class="fn">binding_select</span>(options=[<span class="nu">1835</span>, <span class="nu">1850</span>], name=<span class="st">"Year: "</span>)
+year_select = alt.<span class="fn">selection_point</span>(fields=[<span class="st">"year"</span>], bind=year_dropdown, value=<span class="nu">1835</span>)
+
+<span class="cm"># Layer 1: white fill for missing districts</span>
+base_layer = alt.<span class="fn">Chart</span>(gdf_merged).mark_geoshape(
+    fill=<span class="st">"white"</span>, stroke=<span class="st">"#B8860B"</span>, strokeWidth=<span class="nu">1.5</span>
+).<span class="fn">encode</span>(tooltip=[...]).<span class="fn">transform_filter</span>(year_select)
+
+<span class="cm"># Layer 2: color by Jewish fraction</span>
+data_layer = alt.<span class="fn">Chart</span>(gdf_merged).mark_geoshape(
+    stroke=<span class="st">"#F0B609"</span>, strokeWidth=<span class="nu">1</span>
+).<span class="fn">encode</span>(
+    color=alt.<span class="fn">Color</span>(<span class="st">"Частка_Євреїв:Q"</span>,
+        scale=alt.<span class="fn">Scale</span>(range=[<span class="st">"#FDF8E1"</span>, <span class="st">"#F9DC5C"</span>]),
+        legend=alt.<span class="fn">Legend</span>(title=<span class="kw">None</span>, format=<span class="st">".0%"</span>))
+).<span class="fn">transform_filter</span>(year_select)
+
+map_chart = (base_layer + data_layer).<span class="fn">add_params</span>(year_select).<span class="fn">properties</span>(
+    width=<span class="nu">600</span>, height=<span class="nu">500</span>, title=<span class="st">"% of Jews in the Poltava region"</span>
+).<span class="fn">project</span>(type=<span class="st">"identity"</span>, reflectY=<span class="kw">True</span>)
+
+<span class="cm"># Grouped bar chart (click year to filter)</span>
+click_select = alt.<span class="fn">selection_point</span>(fields=[<span class="st">"year"</span>], empty=<span class="kw">True</span>)
+grouped_bars = alt.<span class="fn">Chart</span>(bar_data).mark_bar().<span class="fn">encode</span>(
+    x=alt.<span class="fn">X</span>(<span class="st">"name:N"</span>, title=<span class="st">"District"</span>),
+    y=alt.<span class="fn">Y</span>(<span class="st">"Частка_Євреїв:Q"</span>, title=<span class="st">"% of Jews"</span>),
+    color=alt.<span class="fn">condition</span>(click_select, alt.<span class="fn">Color</span>(<span class="st">"year:O"</span>, ...), alt.<span class="fn">value</span>(<span class="st">"lightgray"</span>)),
+    xOffset=<span class="st">"year:O"</span>
+).<span class="fn">add_params</span>(click_select).<span class="fn">properties</span>(width=<span class="nu">600</span>, height=<span class="nu">400</span>)</pre>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-label">
+        <span>Jewish Population Share by District — Interactive Map</span>
+        <a href="map_chart.html" target="_blank">open fullscreen ↗</a>
+      </div>
+      <iframe src="map_chart.html" title="Map: Jewish population share by district"></iframe>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-label">
+        <span>% of Jews per District — Grouped Bar Chart (click year to filter)</span>
+        <a href="grouped_bars.html" target="_blank">open fullscreen ↗</a>
+      </div>
+      <iframe class="short" src="grouped_bars.html" title="Bar chart: Jewish population by district"></iframe>
+    </div>
+
+    <div class="conclusion">
+      <div class="conclusion-label">Conclusion</div>
+      <p>Кременчуцький district emerges as the dominant Jewish center with the highest concentration throughout the period. Additionally, Переяславський district saw a major rise in Jewish population since 1835, as did Любенський and Роменський.</p>
+      <p class="interpretation">The growth of Jewish population in Kremenchuk is linked to the city's economic expansion as a major trading hub — Jews from small towns moved there in search of work and opportunity.</p>
+    </div>
+  </div>
+
+  <hr class="section">
+
+  <!-- TASK 2 -->
+  <div class="task" id="task2">
+    <div class="task-header">
+      <span class="task-number">Task 02</span>
+      <h2>Correlation with Merchants and Townspeople</h2>
+    </div>
+
+    <div class="hypothesis">
+      <span class="hypothesis-label">Hypothesis</span>
+      <span class="hypothesis-text">Historically, Jews concentrated in cities and towns where the merchant class was dominant</span>
+    </div>
+
+    <p class="task-description">
+      Using 1848 population data broken down by social estate (<em>сословие</em>), this analysis compares the geographic distribution of Jews, merchants, and townspeople across districts. A Pearson correlation test with and without outliers reveals whether the relationship is structural or driven by a few exceptional cities.
+    </p>
+
+    <div class="code-toggle">
+      <button class="code-toggle-btn" onclick="toggleCode(this, 'code2')">
+        <span class="arrow">▶</span> View Source Code
+      </button>
+      <div class="code-block" id="code2">
+        <div class="code-block-header"><span>Python · pandas · scipy · altair</span><span>Task 02</span></div>
+        <pre><span class="cm"># Extract merchants, townspeople, Jews by district from 1848 data</span>
+data_1848 = pd.read_csv(<span class="st">"...2_Народонаселення на 1848 р..csv"</span>, header=<span class="kw">None</span>).<span class="fn">fillna</span>(<span class="nu">0</span>)
+
+list_jews_city_merchants = [<span class="st">"Евреев"</span>, <span class="st">"Мещан всех разрядов"</span>, <span class="st">"Купцов"</span>, ...]
+jews_city_merchants = data_1848[data_1848[first_col].<span class="fn">isin</span>(list_jews_city_merchants)]
+jews_city_merchants = jews_city_merchants.iloc[:, ::<span class="nu">3</span>]  <span class="cm"># keep о.п. (both sexes) columns</span>
+
+<span class="cm"># Aggregate into Купці, Міщани, Євреї rows</span>
+jews_city_merchants.loc[<span class="st">"Купці"</span>]  = jews_city_merchants.loc[<span class="st">"Купечества всех разрядов"</span>] + jews_city_merchants.loc[<span class="st">"Купцов"</span>]
+jews_city_merchants.loc[<span class="st">"Міщани"</span>] = jews_city_merchants.loc[<span class="st">"Мещан всех разрядов"</span>]  + jews_city_merchants.loc[<span class="st">"Мещан"</span>]
+jews_city_merchants.loc[<span class="st">"Євреї"</span>]  = jews_city_merchants.loc[<span class="st">"Евреев"</span>]
+
+<span class="cm"># Merge with GeoJSON and build three side-by-side choropleth maps</span>
+map_merchants   = alt.<span class="fn">Chart</span>(gdf_merchants).mark_geoshape().<span class="fn">encode</span>(
+    color=alt.<span class="fn">Color</span>(<span class="st">"Купці:Q"</span>, scale=alt.<span class="fn">Scale</span>(scheme=<span class="st">"blues"</span>, type=<span class="st">"log"</span>)))
+map_townspeople = alt.<span class="fn">Chart</span>(gdf_townspeople).mark_geoshape().<span class="fn">encode</span>(
+    color=alt.<span class="fn">Color</span>(<span class="st">"Міщани:Q"</span>, scale=alt.<span class="fn">Scale</span>(scheme=<span class="st">"greens"</span>, type=<span class="st">"quantile"</span>)))
+map_jews        = alt.<span class="fn">Chart</span>(gdf_jews).mark_geoshape().<span class="fn">encode</span>(
+    color=alt.<span class="fn">Color</span>(<span class="st">"Євреї:Q"</span>, scale=alt.<span class="fn">Scale</span>(scheme=<span class="st">"oranges"</span>, type=<span class="st">"quantile"</span>)))
+
+alt.<span class="fn">hconcat</span>(map_merchants, map_jews, map_townspeople)
+
+<span class="cm"># Pearson correlation — with and without IQR outliers</span>
+<span class="kw">from</span> scipy <span class="kw">import</span> stats
+
+<span class="kw">def</span> <span class="fn">remove_outliers_iqr</span>(df, column):
+    Q1, Q3 = df[column].<span class="fn">quantile</span>(<span class="nu">0.25</span>), df[column].<span class="fn">quantile</span>(<span class="nu">0.75</span>)
+    IQR = Q3 - Q1
+    <span class="kw">return</span> df[(df[column] >= Q1 - <span class="nu">1.5</span> * IQR) &amp; (df[column] &lt;= Q3 + <span class="nu">1.5</span> * IQR)]
+
+pearson_r, pearson_p = stats.<span class="fn">pearsonr</span>(df[<span class="st">"Купці"</span>], df[<span class="st">"Євреї"</span>])
+df_clean = <span class="fn">remove_outliers_iqr</span>(<span class="fn">remove_outliers_iqr</span>(df, <span class="st">"Купці"</span>), <span class="st">"Євреї"</span>)
+pearson_r_clean, pearson_p_clean = stats.<span class="fn">pearsonr</span>(df_clean[<span class="st">"Купці"</span>], df_clean[<span class="st">"Євреї"</span>])
+
+<span class="cm"># Scatter plots: circles sized by population density, hover labels, trend line</span>
+scatter = base.mark_circle(opacity=<span class="nu">0.7</span>).<span class="fn">encode</span>(
+    x=alt.<span class="fn">X</span>(<span class="st">"Купці:Q"</span>), y=alt.<span class="fn">Y</span>(<span class="st">"Євреї:Q"</span>),
+    size=alt.<span class="fn">Size</span>(<span class="st">"population_density:Q"</span>, scale=alt.<span class="fn">Scale</span>(range=[<span class="nu">200</span>, <span class="nu">2000</span>])),
+    color=alt.<span class="fn">Color</span>(<span class="st">"district:N"</span>, scale=alt.<span class="fn">Scale</span>(scheme=<span class="st">"category20"</span>))
+)
+trend = base.mark_line(color=<span class="st">"red"</span>, strokeDash=[<span class="nu">5</span>, <span class="nu">5</span>]).<span class="fn">transform_regression</span>(<span class="st">"Купці"</span>, <span class="st">"Євреї"</span>)
+chart_orig  = (scatter + text + trend).<span class="fn">properties</span>(title=<span class="st">"With outliers"</span>)
+chart_clean = (scatter_clean + text_clean + trend_clean).<span class="fn">properties</span>(title=<span class="st">"Without outliers"</span>)
+chart_orig | chart_clean</pre>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-label">
+        <span>Merchants · Jews · Townspeople — Comparative District Maps</span>
+        <a href="maps_merchants_jews_townspeople.html" target="_blank">open fullscreen ↗</a>
+      </div>
+      <iframe src="maps_merchants_jews_townspeople.html" title="Three maps comparing merchant, Jewish, and townspeople distributions"></iframe>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-label">
+        <span>Scatter Plot: Jews vs. Merchants — With and Without Outliers</span>
+        <a href="scatter_merchants_jews.html" target="_blank">open fullscreen ↗</a>
+      </div>
+      <iframe src="scatter_merchants_jews.html" title="Scatter plot: Jewish vs merchant population correlation"></iframe>
+    </div>
+
+    <div class="conclusion">
+      <div class="conclusion-label">Conclusion</div>
+      <p>The correlation between Jews and merchants exists only in major commercial centers. Once outliers are removed, it vanishes completely — revealing that the relationship is not structural across the governorate. The correlation with townspeople is positive but not statistically significant.</p>
+      <p class="interpretation">Imperial restrictions barred Jews from agriculture by prohibiting land ownership. Consequently, they turned to trade and crafts. The data confirms Jews succeeded in commercial activities within authorized urban settlements, while remaining largely absent from rural economies.</p>
+    </div>
+  </div>
+
+  <hr class="section">
+
+  <!-- TASK 3 -->
+  <div class="task" id="task3">
+    <div class="task-header">
+      <span class="task-number">Task 03</span>
+      <h2>The Cossack Question — More Cossacks, Fewer Jews?</h2>
+    </div>
+
+    <div class="hypothesis">
+      <span class="hypothesis-label">Hypothesis</span>
+      <span class="hypothesis-text">Cossack regions were predominantly agrarian and had frequent conflicts with Jews — predicting a negative correlation</span>
+    </div>
+
+    <p class="task-description">
+      Drawing on 1850 population data, this analysis tests whether districts with large Cossack populations had correspondingly smaller Jewish populations. Outliers are removed and a Pearson correlation is calculated to determine statistical significance.
+    </p>
+
+    <div class="code-toggle">
+      <button class="code-toggle-btn" onclick="toggleCode(this, 'code3')">
+        <span class="arrow">▶</span> View Source Code
+      </button>
+      <div class="code-block" id="code3">
+        <div class="code-block-header"><span>Python · pandas · scipy · altair</span><span>Task 03</span></div>
+        <pre><span class="cm"># Extract Cossack populations from 1850 data</span>
+data_1850 = pd.read_csv(<span class="st">"...1_Народонаселення на 1850 р..csv"</span>, header=<span class="kw">None</span>)
+
+list_cossacks = [<span class="st">"Малороссийских козаков"</span>, <span class="st">"Малороссийских козаков на льготе"</span>]
+cossacks = data_1850[data_1850[first_col].<span class="fn">isin</span>(list_cossacks)].iloc[:, ::<span class="nu">3</span>]
+
+<span class="cm"># Aggregate two Cossack sub-groups into one row</span>
+cossacks.loc[<span class="st">"Козаки"</span>] = (
+    cossacks.loc[<span class="st">"Малороссийских козаков"</span>] +
+    cossacks.loc[<span class="st">"Малороссийских козаков на льготе"</span>]
+)
+
+<span class="cm"># Combine with Jews df; remove outliers; Pearson correlation</span>
+correlation_data = cossacks_jews.T.<span class="fn">reset_index</span>()
+correlation_data.columns = [<span class="st">"district"</span>, <span class="st">"Jews"</span>, <span class="st">"Cossacks"</span>]
+correlation_data_clean = <span class="fn">remove_outliers_iqr</span>(<span class="fn">remove_outliers_iqr</span>(correlation_data, <span class="st">"Cossacks"</span>), <span class="st">"Jews"</span>)
+
+pearson_r, pearson_p = stats.<span class="fn">pearsonr</span>(
+    correlation_data_clean[<span class="st">"Cossacks"</span>], correlation_data_clean[<span class="st">"Jews"</span>]
+)
+
+<span class="cm"># Build side-by-side heatmap (districts sorted by Cossack count descending)</span>
+df = correlation_data_clean.<span class="fn">sort_values</span>(<span class="st">"Cossacks"</span>, ascending=<span class="kw">False</span>)
+df_long = df.<span class="fn">melt</span>(id_vars=[<span class="st">"district"</span>], value_vars=[<span class="st">"Cossacks"</span>, <span class="st">"Jews"</span>],
+                  var_name=<span class="st">"group"</span>, value_name=<span class="st">"population"</span>)
+
+heatmap_cossacks = alt.<span class="fn">Chart</span>(df_long[df_long[<span class="st">"group"</span>] == <span class="st">"Cossacks"</span>]).mark_rect().<span class="fn">encode</span>(
+    x=alt.<span class="fn">X</span>(<span class="st">"group:N"</span>),
+    y=alt.<span class="fn">Y</span>(<span class="st">"district:N"</span>, sort=df[<span class="st">"district"</span>].<span class="fn">tolist</span>()),
+    color=alt.<span class="fn">Color</span>(<span class="st">"population:Q"</span>, scale=alt.<span class="fn">Scale</span>(scheme=<span class="st">"purples"</span>))
+).<span class="fn">properties</span>(width=<span class="nu">160</span>, height=<span class="nu">580</span>)
+
+heatmap_jews = alt.<span class="fn">Chart</span>(df_long[df_long[<span class="st">"group"</span>] == <span class="st">"Jews"</span>]).mark_rect().<span class="fn">encode</span>(
+    x=alt.<span class="fn">X</span>(<span class="st">"group:N"</span>),
+    y=alt.<span class="fn">Y</span>(<span class="st">"district:N"</span>, sort=df[<span class="st">"district"</span>].<span class="fn">tolist</span>(), axis=alt.<span class="fn">Axis</span>(labels=<span class="kw">False</span>)),
+    color=alt.<span class="fn">Color</span>(<span class="st">"population:Q"</span>, scale=alt.<span class="fn">Scale</span>(scheme=<span class="st">"purples"</span>, type=<span class="st">"quantile"</span>))
+).<span class="fn">properties</span>(width=<span class="nu">160</span>, height=<span class="nu">580</span>)
+
+chart = (heatmap_cossacks + text_cossacks | heatmap_jews + text_jews).<span class="fn">properties</span>(
+    title={<span class="st">"text"</span>: <span class="st">"Negative Correlation: Cossacks and Jews"</span>,
+           <span class="st">"subtitle"</span>: [<span class="st">"Poltava Governorate, 1850"</span>,
+                        <span class="fn">f</span><span class="st">"Pearson r = {pearson_r:.3f} · p = {pearson_p:.3f}"</span>]}
+)</pre>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-label">
+        <span>Heatmap: Cossack and Jewish Populations by District, 1850</span>
+        <a href="heatmap_cossacks_jews.html" target="_blank">open fullscreen ↗</a>
+      </div>
+      <iframe class="tall" src="heatmap_cossacks_jews.html" title="Heatmap: Cossack and Jewish population by district"></iframe>
+    </div>
+
+    <div class="conclusion">
+      <div class="conclusion-label">Conclusion</div>
+      <p>The correlation between the number of Cossacks and Jews is non-existent. The hypothesis was proved to be false.</p>
+      <p class="interpretation">Jews concentrated in commercial towns while Cossacks remained in military settlements and agricultural areas — suggesting spatial separation rather than active conflict. This also reflects the legacy of 17th-century violence that established patterns of mutual avoidance.</p>
+    </div>
+  </div>
+
+  <hr class="section">
+
+  <!-- RESULTS -->
+  <div class="results">
+    <h2>Summary of Findings</h2>
+
+    <div class="result-item">
+      <span class="result-num">01</span>
+      <div class="result-text">
+        <strong>Кременчуцький district emerged as the dominant Jewish center, with the highest concentration throughout the period.</strong>
+        <span class="interp">The growth of the Jewish population in Kremenchuk is linked to the city's economic expansion — Jews from small towns moved there in search of work, as it was a major regional trading hub.</span>
+      </div>
+    </div>
+
+    <div class="result-item">
+      <span class="result-num">02</span>
+      <div class="result-text">
+        <strong>Merchants showed a strong correlation with Jewish population, but only in major commercial centers — not rural districts.</strong>
+        <span class="interp">Imperial restrictions barred Jews from agriculture, forcing them toward trade and crafts. Jewish economic activity was highly concentrated in specific urban centers, absent from rural economies.</span>
+      </div>
+    </div>
+
+    <div class="result-item">
+      <span class="result-num">03</span>
+      <div class="result-text">
+        <strong>No correlation between Cossack and Jewish populations was found.</strong>
+        <span class="interp">Spatial separation — Jews in commercial towns, Cossacks in military and agricultural settlements — explains the absence of correlation. The legacy of 17th-century violence established durable patterns of mutual avoidance.</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Anna Yastremska · Poltava Governorate Population Analysis · 19th Century
+</footer>
+
+<script>
+  // Code block toggle
+  function toggleCode(btn, id) {
+    const block = document.getElementById(id);
+    const isOpen = block.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+  }
+
+  // Intersection observer for fade-in animations
+  const tasks = document.querySelectorAll('.task');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  tasks.forEach(task => observer.observe(task));
+</script>
+
+</body>
+</html>
